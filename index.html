@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DEV NOVA CREATOR — Création de sites web au Burkina Faso</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Inter:wght@400;500;600&display=swap');
+
+  :root {
+    --bg: #050d1a;
+    --bg2: #0a1628;
+    --bg3: #0e2040;
+    --blue: #1a6fc4;
+    --blue-lt: #3a9fe4;
+    --text: #d0e8ff;
+    --muted: #5a80a0;
+    --border: #0e2a50;
+    --green: #25D366;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  /* ── NAV ── */
+  nav {
+    background: var(--bg2);
+    border-bottom: 2px solid var(--blue);
+    padding: 14px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .logo { display: flex; align-items: center; gap: 12px; }
+  .logo-ico {
+    width: 44px; height: 44px; border-radius: 10px;
+    background: var(--blue); display: flex; align-items: center;
+    justify-content: center; font-family: 'Syne', sans-serif;
+    font-size: 16px; font-weight: 800; color: #fff;
+    border: 2px solid var(--blue-lt);
+  }
+  .logo-name { font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 800; color: #fff; }
+  .logo-sub { font-size: 10px; color: var(--blue-lt); letter-spacing: 3px; }
+  .nav-links { display: flex; gap: 24px; }
+  .nav-links a {
+    color: #8ab0d0; font-size: 13px; text-decoration: none;
+    padding-bottom: 2px; border-bottom: 2px solid transparent;
+    transition: color .2s, border-color .2s;
+  }
+  .nav-links a:hover, .nav-links a.active { color: var(--blue-lt); border-bottom-color: var(--blue); }
+  .nav-cta {
+    background: var(--blue); color: #fff; font-size: 13px; font-weight: 600;
+    padding: 9px 20px; border-radius: 8px; border: none; cursor: pointer;
+    font-family: 'Inter', sans-serif; transition: background .2s;
+    text-decoration: none; display: inline-block;
+  }
+  .nav-cta:hover { background: #155da0; }
+
+  /* ── HERO ── */
+  .hero {
+    padding: 60px 32px 48px;
+    text-align: center;
+    border-bottom: 1px solid var(--bg3);
+    background: radial-gradient(ellipse 60% 40% at 50% 0%, #0e2a5088 0%, transparent 70%);
+  }
+  .hero-eyebrow {
+    font-size: 11px; font-weight: 600; color: var(--blue-lt);
+    letter-spacing: 4px; margin-bottom: 16px;
+  }
+  .hero h1 {
+    font-family: 'Syne', sans-serif; font-size: 48px; font-weight: 800;
+    line-height: 1.1; color: #fff; margin-bottom: 16px;
+  }
+  .hero h1 span { color: var(--blue-lt); }
+  .hero-sub { font-size: 15px; color: var(--muted); max-width: 480px; margin: 0 auto 28px; }
+  .hero-badges { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+  .badge {
+    background: var(--bg2); border: 1px solid var(--border);
+    border-radius: 20px; padding: 6px 16px; font-size: 12px;
+    color: var(--blue-lt); display: flex; align-items: center; gap: 6px;
+  }
+  .badge svg { width: 14px; height: 14px; }
+
+  /* ── TABS ── */
+  .tabs {
+    display: flex; background: var(--bg2);
+    border-bottom: 1px solid var(--bg3);
+    position: sticky; top: 73px; z-index: 90;
+  }
+  .tab {
+    flex: 1; padding: 15px; text-align: center; font-size: 13px;
+    font-weight: 600; color: #4a6a8a; cursor: pointer;
+    border-bottom: 3px solid transparent; transition: all .2s;
+    display: flex; align-items: center; justify-content: center; gap: 7px;
+  }
+  .tab:hover { color: #8ab0d0; }
+  .tab.active { color: var(--blue-lt); border-bottom-color: var(--blue); background: var(--bg); }
+
+  /* ── PANELS ── */
+  .panel { display: none; padding: 32px; max-width: 860px; margin: 0 auto; }
+  .panel.active { display: block; }
+  .section-label {
+    font-size: 11px; font-weight: 700; color: var(--blue-lt);
+    letter-spacing: 4px; margin-bottom: 16px; display: block;
+  }
+
+  /* ── FORMULES ── */
+  .formule-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-bottom: 28px; }
+  .fcard {
+    background: var(--bg2); border: 1.5px solid var(--border);
+    border-radius: 12px; padding: 20px; cursor: pointer;
+    transition: border-color .2s, background .2s;
+  }
+  .fcard:hover { border-color: #1a4a80; }
+  .fcard.sel { border-color: var(--blue); background: #081428; }
+  .fcard-badge { font-size: 9px; font-weight: 700; color: var(--blue-lt); letter-spacing: 2px; margin-bottom: 6px; }
+  .fcard-name { font-size: 14px; font-weight: 700; color: #d0e8ff; margin-bottom: 6px; font-family: 'Syne', sans-serif; }
+  .fcard-price { font-size: 24px; font-weight: 800; color: var(--blue-lt); font-family: 'Syne', sans-serif; }
+  .fcard-unit { font-size: 10px; color: var(--muted); margin-bottom: 10px; }
+  .fcard-feats { font-size: 11px; color: #4a6a8a; line-height: 1.8; }
+  .fcard-feats li { list-style: none; padding-left: 12px; position: relative; }
+  .fcard-feats li::before { content: '→'; position: absolute; left: 0; color: var(--blue); font-size: 10px; }
+  .pop-lbl {
+    background: var(--blue); color: #e8f4ff; font-size: 9px; font-weight: 700;
+    letter-spacing: 1px; padding: 3px 10px; border-radius: 10px;
+    display: inline-block; margin-bottom: 6px;
+  }
+
+  /* ── FORM ── */
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+  .form-full { margin-bottom: 14px; }
+  label.flabel { font-size: 11px; font-weight: 600; color: var(--muted); letter-spacing: 1px; margin-bottom: 6px; display: block; }
+  input.finput, select.fselect, textarea.ftextarea {
+    width: 100%; background: var(--bg2); border: 1px solid var(--border);
+    border-radius: 8px; padding: 11px 14px; color: var(--text);
+    font-size: 13px; font-family: 'Inter', sans-serif; outline: none;
+    transition: border-color .2s;
+  }
+  input.finput:focus, select.fselect:focus, textarea.ftextarea:focus { border-color: var(--blue); }
+  textarea.ftextarea { resize: vertical; min-height: 90px; }
+  .submit-btn {
+    width: 100%; background: var(--blue); color: #fff; font-size: 15px;
+    font-weight: 700; padding: 16px; border-radius: 10px; border: none;
+    cursor: pointer; font-family: 'Syne', sans-serif; letter-spacing: 0.5px;
+    transition: background .2s; margin-top: 6px;
+  }
+  .submit-btn:hover { background: #155da0; }
+
+  /* ── SUCCESS ── */
+  .success-box {
+    display: none; background: #051a10; border: 1px solid #1D9E75;
+    border-radius: 12px; padding: 32px; text-align: center;
+  }
+  .success-box.show { display: block; }
+  .success-ico { font-size: 48px; color: #1D9E75; margin-bottom: 12px; }
+  .success-title { font-size: 20px; font-weight: 700; color: #5DCAA5; font-family: 'Syne', sans-serif; margin-bottom: 8px; }
+  .success-msg { font-size: 13px; color: #4a8a6a; line-height: 1.7; margin-bottom: 16px; }
+  .wa-btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--green); color: #fff; font-size: 14px; font-weight: 700;
+    padding: 14px 28px; border-radius: 10px; text-decoration: none;
+    font-family: 'Syne', sans-serif; transition: background .2s;
+  }
+  .wa-btn:hover { background: #1da851; }
+
+  /* ── CONTACT ── */
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
+  .ccard {
+    background: var(--bg2); border: 1px solid var(--border);
+    border-radius: 12px; padding: 20px; text-align: center;
+    transition: border-color .2s;
+  }
+  .ccard:hover { border-color: #1a4a80; }
+  .ccard-ico {
+    width: 48px; height: 48px; border-radius: 50%;
+    background: var(--bg3); border: 1px solid #1a4a80;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 12px; font-size: 22px; color: var(--blue-lt);
+  }
+  .ccard-name { font-size: 14px; font-weight: 700; color: #d0e8ff; margin-bottom: 4px; font-family: 'Syne', sans-serif; }
+  .ccard-val { font-size: 12px; color: var(--blue-lt); margin-bottom: 14px; }
+  .ccard-btn {
+    background: var(--blue); color: #fff; font-size: 12px; font-weight: 600;
+    padding: 9px 18px; border-radius: 7px; border: none; cursor: pointer;
+    width: 100%; font-family: 'Inter', sans-serif; transition: background .2s;
+    text-decoration: none; display: block;
+  }
+  .ccard-btn:hover { background: #155da0; }
+  .ccard-btn.wa { background: var(--green); }
+  .ccard-btn.wa:hover { background: #1da851; }
+
+  .hours-box {
+    background: var(--bg2); border: 1px solid var(--border);
+    border-radius: 12px; padding: 24px; text-align: center;
+  }
+  .hours-title { font-size: 14px; font-weight: 700; color: #d0e8ff; font-family: 'Syne', sans-serif; margin-bottom: 10px; }
+  .hours-row { font-size: 13px; color: var(--muted); line-height: 2; }
+  .hours-highlight { color: #5DCAA5; font-weight: 600; }
+
+  /* ── FAQ ── */
+  .faq-item {
+    background: var(--bg2); border: 1px solid var(--bg3);
+    border-radius: 10px; padding: 16px 18px; margin-bottom: 10px;
+    cursor: pointer; transition: border-color .2s;
+  }
+  .faq-item:hover { border-color: #1a4a80; }
+  .faq-q {
+    font-size: 14px; font-weight: 600; color: #d0e8ff;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .faq-q span { font-size: 18px; color: var(--blue-lt); transition: transform .2s; }
+  .faq-item.open .faq-q span { transform: rotate(45deg); }
+  .faq-a { font-size: 13px; color: var(--muted); margin-top: 10px; line-height: 1.7; display: none; }
+  .faq-item.open .faq-a { display: block; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #030810; border-top: 1px solid #0a1a30;
+    padding: 20px 32px; display: flex;
+    justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 12px;
+  }
+  .footer-vals { display: flex; gap: 20px; flex-wrap: wrap; }
+  .fv { font-size: 12px; color: #3a6090; display: flex; align-items: center; gap: 6px; }
+  .footer-copy { font-size: 11px; color: #1a3050; }
+
+  @media (max-width: 600px) {
+    .hero h1 { font-size: 32px; }
+    .formule-grid { grid-template-columns: 1fr; }
+    .form-grid { grid-template-columns: 1fr; }
+    .contact-grid { grid-template-columns: 1fr; }
+    .panel { padding: 20px 16px; }
+    nav { padding: 12px 16px; }
+    .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">
+    <img src="https://files.catbox.moe/d6q2ze.jpeg" 
+     alt="DEV NOVA CREATOR Logo"
+     style="
+       width: 52px;
+       height: 52px;
+       object-fit: cover;
+       border-radius: 10px;
+       border: 2px solid var(--blue-lt);
+     ">
+    <div>
+      <div class="logo-name">DEV NOVA CREATOR</div>
+      <div class="logo-sub">CRÉATION DE SITES</div>
+    </div>
+  </div>
+  <div class="nav-links">
+    <a href="#" class="active" onclick="showTab('commande'); return false;">Commande</a>
+    <a href="#" onclick="showTab('contact'); return false;">Contact</a>
+    <a href="#" onclick="showTab('faq'); return false;">FAQ</a>
+  </div>
+  <a href="#form-section" class="nav-cta">Commander maintenant</a>
+</nav>
+
+<div class="hero">
+  <div class="hero-eyebrow">AGENCE DIGITALE · BURKINA FASO</div>
+  <h1>Votre site web,<br><span>livré en 72h.</span></h1>
+  <p class="hero-sub">Nous créons des sites modernes et professionnels pour les entrepreneurs et commerces du Burkina Faso.</p>
+  <div class="hero-badges">
+    <span class="badge">⚡ Réponse rapide</span>
+    <span class="badge">🛡️ Devis gratuit</span>
+    <span class="badge">💳 Paiement en 2 fois</span>
+    <span class="badge">✅ Satisfaction garantie</span>
+  </div>
+</div>
+
+<div class="tabs">
+  <div class="tab active" id="tab-commande" onclick="showTab('commande')">
+    🛒 Passer commande
+  </div>
+  <div class="tab" id="tab-contact" onclick="showTab('contact')">
+    💬 Nous contacter
+  </div>
+  <div class="tab" id="tab-faq" onclick="showTab('faq')">
+    ❓ FAQ
+  </div>
+</div>
+
+<!-- PANEL COMMANDE -->
+<div class="panel active" id="panel-commande">
+  <span class="section-label">1 — CHOISISSEZ VOTRE FORMULE</span>
+  <div class="formule-grid">
+    <div class="fcard sel" onclick="selectFormule(this, 'Site vitrine — 45 000 FCFA')">
+      <div class="fcard-badge">ESSENTIEL</div>
+      <div class="fcard-name">Site vitrine</div>
+      <div class="fcard-price">45 000</div>
+      <div class="fcard-unit">FCFA · paiement unique</div>
+      <ul class="fcard-feats">
+        <li>5 pages professionnelles</li>
+        <li>Adapté mobile & tablette</li>
+        <li>Formulaire de contact</li>
+        <li>1 mois de SAV inclus</li>
+      </ul>
+    </div>
+    <div class="fcard" onclick="selectFormule(this, 'Site complet — 75 000 FCFA')">
+      <div class="pop-lbl">⭐ PLUS DEMANDÉ</div>
+      <div class="fcard-badge">PROFESSIONNEL</div>
+      <div class="fcard-name">Site complet</div>
+      <div class="fcard-price">75 000</div>
+      <div class="fcard-unit">FCFA · paiement unique</div>
+      <ul class="fcard-feats">
+        <li>10 pages + Blog intégré</li>
+        <li>Référencement Google</li>
+        <li>Photos & textes inclus</li>
+        <li>3 mois de SAV inclus</li>
+      </ul>
+    </div>
+    <div class="fcard" onclick="selectFormule(this, 'Boutique en ligne — 120 000 FCFA')">
+      <div class="fcard-badge">E-COMMERCE</div>
+      <div class="fcard-name">Boutique en ligne</div>
+      <div class="fcard-price">120 000</div>
+      <div class="fcard-unit">FCFA · paiement unique</div>
+      <ul class="fcard-feats">
+        <li>Catalogue de produits</li>
+        <li>Paiement Mobile Money</li>
+        <li>Gestion des commandes</li>
+        <li>6 mois de SAV inclus</li>
+      </ul>
+    </div>
+  </div>
+
+  <span class="section-label">2 — VOS INFORMATIONS</span>
+  <div id="form-section">
+    <div id="order-form">
+      <div class="form-grid">
+        <div>
+          <label class="flabel">Nom complet *</label>
+          <input class="finput" id="f-nom" type="text" placeholder="Votre nom et prénom">
+        </div>
+        <div>
+          <label class="flabel">Numéro WhatsApp *</label>
+          <input class="finput" id="f-tel" type="tel" placeholder="+226 XX XX XX XX">
+        </div>
+      </div>
+      <div class="form-grid">
+        <div>
+          <label class="flabel">Nom de votre activité *</label>
+          <input class="finput" id="f-activite" type="text" placeholder="Ex : Boutique Mode Bobo">
+        </div>
+        <div>
+          <label class="flabel">Type d'activité</label>
+          <select class="fselect" id="f-type">
+            <option value="">Sélectionner...</option>
+            <option>Commerce / Boutique</option>
+            <option>Restaurant / Alimentation</option>
+            <option>Services professionnels</option>
+            <option>Association / ONG</option>
+            <option>Artisanat / Couture</option>
+            <option>Autre</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-full">
+        <label class="flabel">Formule sélectionnée</label>
+        <input class="finput" id="f-formule" type="text" value="Site vitrine — 35 000 FCFA" readonly style="color: var(--blue-lt); cursor: default;">
+      </div>
+      <div class="form-full">
+        <label class="flabel">Décrivez votre projet (optionnel)</label>
+        <textarea class="ftextarea" id="f-desc" placeholder="Décrivez votre activité, ce que vous voulez sur le site, vos couleurs préférées, des exemples de sites que vous aimez..."></textarea>
+      </div>
+      <div class="form-full">
+        <label class="flabel">Comment préférez-vous être contacté ?</label>
+        <select class="fselect" id="f-contact-pref">
+          <option>WhatsApp (recommandé)</option>
+          <option>Appel téléphonique</option>
+          <option>Facebook Messenger</option>
+        </select>
+      </div>
+      <button class="submit-btn" onclick="submitOrder()">
+        📩 Envoyer ma commande — Devis 100% gratuit
+      </button>
+    </div>
+
+    <div class="success-box" id="success-box">
+      <div class="success-ico">✅</div>
+      <div class="success-title">Commande envoyée !</div>
+      <div class="success-msg" id="success-msg"></div>
+      <a class="wa-btn" id="wa-link" href="#" target="_blank">
+        📱 Confirmer sur WhatsApp
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- PANEL CONTACT -->
+<div class="panel" id="panel-contact">
+  <span class="section-label">CONTACTEZ-NOUS DIRECTEMENT</span>
+  <div class="contact-grid">
+    <div class="ccard">
+      <div class="ccard-ico">📱</div>
+      <div class="ccard-name">WhatsApp</div>
+      <div class="ccard-val">NOVQifrey DEV</div>
+      <a class="ccard-btn wa" href="https://wa.me/22665653323?text=Bonjour%20DEV%20NOVA%20CREATOR%2C%20je%20souhaite%20un%20devis%20pour%20mon%20site%20web." target="_blank">
+        Ouvrir WhatsApp →
+      </a>
+    </div>
+    <div class="ccard">
+      <div class="ccard-ico">📘</div>
+      <div class="ccard-name">Facebook</div>
+      <div class="ccard-val">DEV NOVA CREATOR</div>
+      <a class="ccard-btn" href="https://www.facebook.com/share/1GuSA3MvJu/?mibextid=wwXIfr" target="_blank">
+        Voir la page →
+      </a>
+    </div>
+    <div class="ccard">
+      <div class="ccard-ico">✉️</div>
+      <div class="ccard-name">Email</div>
+      <div class="ccard-val">devnovaofficiel@gmail.com</div>
+      <a class="ccard-btn" href="mailto:devnovaofficiel@gmail.com">
+        Envoyer un email →
+      </a>
+    </div>
+      </div>
+  <div class="hours-box">
+    <div class="hours-title">⏰ Heures de disponibilité</div>
+    <div class="hours-row">
+      Lundi – Vendredi : 8h00 – 20h00<br>
+      Samedi : 9h00 – 18h00<br>
+      Dimanche : 10h00 – 16h00<br>
+      <span class="hours-highlight">Réponse WhatsApp garantie</span>
+    </div>
+  </div>
+</div>
+
+<!-- PANEL FAQ -->
+<div class="panel" id="panel-faq">
+  <span class="section-label">QUESTIONS FRÉQUENTES</span>
+
+  <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-q">Comment se passe une commande ? <span>+</span></div>
+    <div class="faq-a">Vous remplissez le formulaire → nous vous contactons sous 2h → vous validez le devis → nous créons votre site en 72h → livraison avec formation incluse. Simple et rapide !</div>
+  </div>
+  <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-q">Peut-on payer en plusieurs fois ? <span>+</span></div>
+    <div class="faq-a">Oui ! Nous acceptons le paiement en 2 fois : 50% au démarrage du projet et 50% à la livraison. Nous acceptons Orange Money, Moov Money et espèces.</div>
+  </div>
+  <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-q">Mon site sera-t-il visible sur téléphone ? <span>+</span></div>
+    <div class="faq-a">Absolument. Tous nos sites sont 100% adaptés aux téléphones, tablettes et ordinateurs. La majorité des visiteurs au Burkina naviguent sur mobile — c'est notre priorité.</div>
+  </div>
+  <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-q">Je n'ai aucune expérience, est-ce un problème ? <span>+</span></div>
+    <div class="faq-a">Pas du tout ! Nous nous occupons de tout de A à Z. Une formation simple est incluse pour que vous puissiez mettre à jour votre site vous-même après la livraison.</div>
+  </div>
+  <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-q">Que comprend le SAV inclus ? <span>+</span></div>
+    <div class="faq-a">Le SAV comprend les corrections de bugs, les modifications de textes et d'images, et le support technique via WhatsApp pendant la durée indiquée dans votre formule.</div>
+  </div>
+  <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-q">Puis-je voir des exemples de sites réalisés ? <span>+</span></div>
+    <div class="faq-a">Oui ! Contactez-nous sur WhatsApp ou Facebook et nous vous enverrons notre portfolio avec les sites que nous avons réalisés pour d'autres clients.</div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-vals">
+    <div class="fv">🏆 Professionnalisme</div>
+    <div class="fv">💡 Innovation</div>
+    <div class="fv">🤝 Confiance</div>
+    <div class="fv">⚡ Rapidité</div>
+  </div>
+  <div class="footer-copy">© 2026 DEV NOVA CREATOR · Burkina Faso</div>
+</footer>
+
+<script>
+function showTab(name) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('panel-' + name).classList.add('active');
+  document.getElementById('tab-' + name).classList.add('active');
+}
+
+function selectFormule(el, val) {
+  document.querySelectorAll('.fcard').forEach(c => c.classList.remove('sel'));
+  el.classList.add('sel');
+  document.getElementById('f-formule').value = val;
+}
+
+function submitOrder() {
+  var nom = document.getElementById('f-nom').value.trim();
+  var tel = document.getElementById('f-tel').value.trim();
+  var activite = document.getElementById('f-activite').value.trim();
+  if (!nom || !tel || !activite) {
+    alert('Veuillez remplir les champs obligatoires : Nom complet, WhatsApp et Activité.');
+    return;
+  }
+  var formule = document.getElementById('f-formule').value;
+  var desc = document.getElementById('f-desc').value.trim();
+  var pref = document.getElementById('f-contact-pref').value;
+  var msg = 'Bonjour DEV NOVA CREATOR ! 👋%0A%0AJe souhaite commander un site web.%0A%0A👤 Nom : ' + encodeURIComponent(nom) +
+    '%0A📞 Contact : ' + encodeURIComponent(tel) +
+    '%0A🏪 Activité : ' + encodeURIComponent(activite) +
+    '%0A📦 Formule : ' + encodeURIComponent(formule) +
+    (desc ? '%0A📝 Projet : ' + encodeURIComponent(desc) : '') +
+    '%0A📲 Préférence contact : ' + encodeURIComponent(pref);
+
+  document.getElementById('success-msg').innerHTML =
+    'Merci <strong style="color:#5DCAA5">' + nom + '</strong> ! 🎉<br>' +
+    'Votre demande pour <strong style="color:#5DCAA5">' + activite + '</strong> a bien été enregistrée.<br><br>' +
+    'Cliquez ci-dessous pour envoyer votre commande via WhatsApp.<br>' +
+    'Nous vous répondrons <strong style="color:#5DCAA5">dans les 2 heures</strong>.';
+
+  document.getElementById('wa-link').href = 'https://wa.me/22665653323?text=' + msg;
+  document.getElementById('order-form').style.display = 'none';
+  document.getElementById('success-box').classList.add('show');
+}
+
+function toggleFaq(el) {
+  el.classList.toggle('open');
+}
+</script>
+</body>
+</html>
